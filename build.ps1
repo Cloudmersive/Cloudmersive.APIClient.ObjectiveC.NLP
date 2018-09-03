@@ -1,4 +1,4 @@
 ﻿Remove-Item –path ./client –recurse
-& java -jar swagger-codegen-cli.jar generate -i https://api.cloudmersive.com/swagger/api/ocr -l objc -o client -c packageconfig.json
-(Get-Content ./client/CloudmersiveOCRApiClient.podspec).replace('CloudmersiveOCRApiClient/**/*.{m,h}', "client/CloudmersiveOCRApiClient/**/*.{m,h}") | Set-Content ./client/CloudmersiveOCRApiClient.podspec
-(Get-Content ./client/CloudmersiveOCRApiClient.podspec).replace('CloudmersiveOCRApiClient/**/*.h', "client/CloudmersiveOCRApiClient/**/*.h") | Set-Content ./client/CloudmersiveOCRApiClient.podspec
+& java -jar swagger-codegen-cli.jar generate -i https://api.cloudmersive.com/swagger/api/nlp -l objc -o client -c packageconfig.json
+(Get-Content ./client/CloudmersiveNLPApiClient.podspec).replace('CloudmersiveNLPApiClient/**/*.{m,h}', "client/CloudmersiveNLPApiClient/**/*.{m,h}") | Set-Content ./client/CloudmersiveNLPApiClient.podspec
+(Get-Content ./client/CloudmersiveNLPApiClient.podspec).replace('CloudmersiveNLPApiClient/**/*.h', "client/CloudmersiveNLPApiClient/**/*.h") | Set-Content ./client/CloudmersiveNLPApiClient.podspec
