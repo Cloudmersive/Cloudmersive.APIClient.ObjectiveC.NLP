@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "CloudmersiveNLPApiClient"
-    s.version          = "1.1.2"
+    s.version          = "1.1.3"
 
     s.summary          = "nlpapi"
     s.description      = <<-DESC
