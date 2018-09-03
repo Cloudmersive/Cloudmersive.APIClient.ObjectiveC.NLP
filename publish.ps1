@@ -1,0 +1,1 @@
+& pod trunk push ./client/CloudmersiveOCRApiClient.podspec --allow-warnings
