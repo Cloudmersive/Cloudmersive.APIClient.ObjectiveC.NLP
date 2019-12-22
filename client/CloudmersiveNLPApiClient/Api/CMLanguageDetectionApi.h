@@ -1,10 +1,11 @@
 #import <Foundation/Foundation.h>
+#import "CMLanguageDetectionRequest.h"
 #import "CMLanguageDetectionResponse.h"
 #import "CMApi.h"
 
 /**
-* nlpapi
-* The powerful Natural Language Processing APIs let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
+* nlpapiv2
+* The powerful Natural Language Processing APIs (v2) let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
 *
 * OpenAPI spec version: v1
 * 
@@ -26,12 +27,12 @@ extern NSInteger kCMLanguageDetectionApiMissingParamErrorCode;
 /// Detect language of text
 /// Automatically determine which language a text string is written in.  Supports Danish (DAN), German (DEU), English (ENG), French (FRA), Italian (ITA), Japanese (JPN), Korean (KOR), Dutch (NLD), Norwegian (NOR), Portuguese (POR), Russian (RUS), Spanish (SPA), Swedish (SWE), Chinese (ZHO).
 ///
-/// @param textToDetect Text to detect language of
+/// @param input 
 /// 
 ///  code:200 message:"OK"
 ///
 /// @return CMLanguageDetectionResponse*
--(NSURLSessionTask*) languageDetectionPostWithTextToDetect: (NSString*) textToDetect
+-(NSURLSessionTask*) languageDetectionGetLanguageWithInput: (CMLanguageDetectionRequest*) input
     completionHandler: (void (^)(CMLanguageDetectionResponse* output, NSError* error)) handler;
 
 

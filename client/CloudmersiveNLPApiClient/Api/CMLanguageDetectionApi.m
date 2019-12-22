@@ -1,6 +1,7 @@
 #import "CMLanguageDetectionApi.h"
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
+#import "CMLanguageDetectionRequest.h"
 #import "CMLanguageDetectionResponse.h"
 
 
@@ -52,24 +53,24 @@ NSInteger kCMLanguageDetectionApiMissingParamErrorCode = 234513;
 ///
 /// Detect language of text
 /// Automatically determine which language a text string is written in.  Supports Danish (DAN), German (DEU), English (ENG), French (FRA), Italian (ITA), Japanese (JPN), Korean (KOR), Dutch (NLD), Norwegian (NOR), Portuguese (POR), Russian (RUS), Spanish (SPA), Swedish (SWE), Chinese (ZHO).
-///  @param textToDetect Text to detect language of 
+///  @param input  
 ///
 ///  @returns CMLanguageDetectionResponse*
 ///
--(NSURLSessionTask*) languageDetectionPostWithTextToDetect: (NSString*) textToDetect
+-(NSURLSessionTask*) languageDetectionGetLanguageWithInput: (CMLanguageDetectionRequest*) input
     completionHandler: (void (^)(CMLanguageDetectionResponse* output, NSError* error)) handler {
-    // verify the required parameter 'textToDetect' is set
-    if (textToDetect == nil) {
-        NSParameterAssert(textToDetect);
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"textToDetect"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
             NSError* error = [NSError errorWithDomain:kCMLanguageDetectionApiErrorDomain code:kCMLanguageDetectionApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp/language/detect"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/language/detect"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -94,7 +95,7 @@ NSInteger kCMLanguageDetectionApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = textToDetect;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"

@@ -1,12 +1,13 @@
 #import <Foundation/Foundation.h>
-#import "CMCheckJsonResponse.h"
-#import "CMCheckSentenceJsonResponse.h"
-#import "CMCorrectJsonResponse.h"
+#import "CMCheckSentenceRequest.h"
+#import "CMCheckSentenceResponse.h"
+#import "CMCheckWordRequest.h"
+#import "CMCheckWordResponse.h"
 #import "CMApi.h"
 
 /**
-* nlpapi
-* The powerful Natural Language Processing APIs let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
+* nlpapiv2
+* The powerful Natural Language Processing APIs (v2) let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
 *
 * OpenAPI spec version: v1
 * 
@@ -18,24 +19,12 @@
 
 
 
-@interface CMSpellCheckApi: NSObject <CMApi>
+@interface CMSpellcheckApi: NSObject <CMApi>
 
-extern NSString* kCMSpellCheckApiErrorDomain;
-extern NSInteger kCMSpellCheckApiMissingParamErrorCode;
+extern NSString* kCMSpellcheckApiErrorDomain;
+extern NSInteger kCMSpellcheckApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(CMApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
-
-/// Spell check word
-/// Spell check a word as JSON
-///
-/// @param value Input sentence
-/// 
-///  code:200 message:"OK"
-///
-/// @return CMCheckJsonResponse*
--(NSURLSessionTask*) spellCheckCheckJsonWithValue: (NSString*) value
-    completionHandler: (void (^)(CMCheckJsonResponse* output, NSError* error)) handler;
-
 
 /// Check if sentence is spelled correctly
 /// Checks whether the sentence is spelled correctly and returns the result as JSON
@@ -44,33 +33,9 @@ extern NSInteger kCMSpellCheckApiMissingParamErrorCode;
 /// 
 ///  code:200 message:"OK"
 ///
-/// @return CMCheckSentenceJsonResponse*
--(NSURLSessionTask*) spellCheckCheckSentenceJsonWithValue: (NSString*) value
-    completionHandler: (void (^)(CMCheckSentenceJsonResponse* output, NSError* error)) handler;
-
-
-/// Spell check a sentence
-/// Check if a sentence is spelled correctly
-///
-/// @param value Input sentence word
-/// 
-///  code:200 message:"OK"
-///
-/// @return NSNumber*
--(NSURLSessionTask*) spellCheckCheckSentenceStringWithValue: (NSString*) value
-    completionHandler: (void (^)(NSNumber* output, NSError* error)) handler;
-
-
-/// Find spelling corrections
-/// Find the spelling corrections for a word
-///
-/// @param value Input word
-/// 
-///  code:200 message:"OK"
-///
-/// @return NSString*
--(NSURLSessionTask*) spellCheckCorrectWithValue: (NSString*) value
-    completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+/// @return CMCheckSentenceResponse*
+-(NSURLSessionTask*) spellcheckCheckSentenceWithValue: (CMCheckSentenceRequest*) value
+    completionHandler: (void (^)(CMCheckSentenceResponse* output, NSError* error)) handler;
 
 
 /// Find spelling corrections
@@ -80,21 +45,9 @@ extern NSInteger kCMSpellCheckApiMissingParamErrorCode;
 /// 
 ///  code:200 message:"OK"
 ///
-/// @return CMCorrectJsonResponse*
--(NSURLSessionTask*) spellCheckCorrectJsonWithValue: (NSString*) value
-    completionHandler: (void (^)(CMCorrectJsonResponse* output, NSError* error)) handler;
-
-
-/// Spell check a word
-/// Check if a word is spelled correctly
-///
-/// @param value Input string word
-/// 
-///  code:200 message:"OK"
-///
-/// @return NSNumber*
--(NSURLSessionTask*) spellCheckPostWithValue: (NSString*) value
-    completionHandler: (void (^)(NSNumber* output, NSError* error)) handler;
+/// @return CMCheckWordResponse*
+-(NSURLSessionTask*) spellcheckCorrectJsonWithValue: (CMCheckWordRequest*) value
+    completionHandler: (void (^)(CMCheckWordResponse* output, NSError* error)) handler;
 
 
 

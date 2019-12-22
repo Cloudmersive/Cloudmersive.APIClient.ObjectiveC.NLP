@@ -4,12 +4,12 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**languageDetectionPost**](CMLanguageDetectionApi.md#languagedetectionpost) | **POST** /nlp/language/detect | Detect language of text
+[**languageDetectionGetLanguage**](CMLanguageDetectionApi.md#languagedetectiongetlanguage) | **POST** /nlp-v2/language/detect | Detect language of text
 
 
-# **languageDetectionPost**
+# **languageDetectionGetLanguage**
 ```objc
--(NSURLSessionTask*) languageDetectionPostWithTextToDetect: (NSString*) textToDetect
+-(NSURLSessionTask*) languageDetectionGetLanguageWithInput: (CMLanguageDetectionRequest*) input
         completionHandler: (void (^)(CMLanguageDetectionResponse* output, NSError* error)) handler;
 ```
 
@@ -27,18 +27,18 @@ CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
 
 
-NSString* textToDetect = textToDetect_example; // Text to detect language of
+CMLanguageDetectionRequest* input = [[CMLanguageDetectionRequest alloc] init]; // 
 
 CMLanguageDetectionApi*apiInstance = [[CMLanguageDetectionApi alloc] init];
 
 // Detect language of text
-[apiInstance languageDetectionPostWithTextToDetect:textToDetect
+[apiInstance languageDetectionGetLanguageWithInput:input
           completionHandler: ^(CMLanguageDetectionResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling CMLanguageDetectionApi->languageDetectionPost: %@", error);
+                            NSLog(@"Error calling CMLanguageDetectionApi->languageDetectionGetLanguage: %@", error);
                         }
                     }];
 ```
@@ -47,7 +47,7 @@ CMLanguageDetectionApi*apiInstance = [[CMLanguageDetectionApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **textToDetect** | **NSString***| Text to detect language of | 
+ **input** | [**CMLanguageDetectionRequest***](CMLanguageDetectionRequest.md)|  | 
 
 ### Return type
 

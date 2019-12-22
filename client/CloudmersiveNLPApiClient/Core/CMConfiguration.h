@@ -3,8 +3,8 @@
 @class CMLogger;
 
 /**
-* nlpapi
-* The powerful Natural Language Processing APIs let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
+* nlpapiv2
+* The powerful Natural Language Processing APIs (v2) let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
 *
 * OpenAPI spec version: v1
 * 
@@ -15,7 +15,7 @@
 */
 
 
-static NSString * const kCMAPIVersion = @"1.1.3";
+static NSString * const kCMAPIVersion = @"2.0.1";
 
 @protocol CMConfiguration <NSObject>
 

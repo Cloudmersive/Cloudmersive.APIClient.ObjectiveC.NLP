@@ -9,11 +9,11 @@
 
 Pod::Spec.new do |s|
     s.name             = "CloudmersiveNLPApiClient"
-    s.version          = "1.1.3"
+    s.version          = "2.0.1"
 
-    s.summary          = "nlpapi"
+    s.summary          = "nlpapiv2"
     s.description      = <<-DESC
-                         The powerful Natural Language Processing APIs let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
+                         The powerful Natural Language Processing APIs (v2) let you perform part of speech tagging, entity identification, sentence parsing, and much more to help you understand the meaning of unstructured text.
                          DESC
 
     s.platform     = :ios, '7.0'
