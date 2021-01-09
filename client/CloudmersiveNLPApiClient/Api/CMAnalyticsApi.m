@@ -1,20 +1,28 @@
-#import "CMPosTaggerApi.h"
+#import "CMAnalyticsApi.h"
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
-#import "CMPosRequest.h"
-#import "CMPosResponse.h"
+#import "CMHateSpeechAnalysisRequest.h"
+#import "CMHateSpeechAnalysisResponse.h"
+#import "CMProfanityAnalysisRequest.h"
+#import "CMProfanityAnalysisResponse.h"
+#import "CMSentimentAnalysisRequest.h"
+#import "CMSentimentAnalysisResponse.h"
+#import "CMSimilarityAnalysisRequest.h"
+#import "CMSimilarityAnalysisResponse.h"
+#import "CMSubjectivityAnalysisRequest.h"
+#import "CMSubjectivityAnalysisResponse.h"
 
 
-@interface CMPosTaggerApi ()
+@interface CMAnalyticsApi ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
-@implementation CMPosTaggerApi
+@implementation CMAnalyticsApi
 
-NSString* kCMPosTaggerApiErrorDomain = @"CMPosTaggerApiErrorDomain";
-NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
+NSString* kCMAnalyticsApiErrorDomain = @"CMAnalyticsApiErrorDomain";
+NSInteger kCMAnalyticsApiMissingParamErrorCode = 234513;
 
 @synthesize apiClient = _apiClient;
 
@@ -51,26 +59,26 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Part-of-speech tag a string, filter to adjectives
-/// Part-of-speech (POS) tag a string, find the adjectives, and return result as JSON
-///  @param request Input string 
+/// Perform Hate Speech Analysis and Detection on Text
+/// Analyze input text using advanced Hate Speech Analysis to determine if the input contains hate speech language.  Supports English language input.  Consumes 1-2 API calls per sentence.
+///  @param input Input hate speech analysis request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMHateSpeechAnalysisResponse*
 ///
--(NSURLSessionTask*) posTaggerTagAdjectivesWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) analyticsHateSpeechWithInput: (CMHateSpeechAnalysisRequest*) input
+    completionHandler: (void (^)(CMHateSpeechAnalysisResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMAnalyticsApiErrorDomain code:kCMAnalyticsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/adjectives"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/analytics/hate-speech"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -95,7 +103,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -108,35 +116,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMHateSpeechAnalysisResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMHateSpeechAnalysisResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to adverbs
-/// Part-of-speech (POS) tag a string, find the adverbs, and return result as JSON
-///  @param request Input string 
+/// Perform Profanity and Obscene Language Analysis and Detection on Text
+/// Analyze input text using advanced Profanity and Obscene Language Analysis to determine if the input contains profane language.  Supports English language input.  Consumes 1-2 API calls per sentence.
+///  @param input Input profanity analysis request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMProfanityAnalysisResponse*
 ///
--(NSURLSessionTask*) posTaggerTagAdverbsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) analyticsProfanityWithInput: (CMProfanityAnalysisRequest*) input
+    completionHandler: (void (^)(CMProfanityAnalysisResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMAnalyticsApiErrorDomain code:kCMAnalyticsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/adverbs"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/analytics/profanity"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -161,7 +169,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -174,35 +182,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMProfanityAnalysisResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMProfanityAnalysisResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to nouns
-/// Part-of-speech (POS) tag a string, find the nouns, and return result as JSON
-///  @param request Input string 
+/// Perform Sentiment Analysis and Classification on Text
+/// Analyze input text using advanced Sentiment Analysis to determine if the input is positive, negative, or neutral.  Supports English language input.  Consumes 1-2 API calls per sentence.
+///  @param input Input sentiment analysis request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMSentimentAnalysisResponse*
 ///
--(NSURLSessionTask*) posTaggerTagNounsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) analyticsSentimentWithInput: (CMSentimentAnalysisRequest*) input
+    completionHandler: (void (^)(CMSentimentAnalysisResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMAnalyticsApiErrorDomain code:kCMAnalyticsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/nouns"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/analytics/sentiment"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -227,7 +235,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -240,35 +248,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMSentimentAnalysisResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMSentimentAnalysisResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to pronouns
-/// Part-of-speech (POS) tag a string, find the pronouns, and return result as JSON
-///  @param request Input string 
+/// Perform Semantic Similarity Comparison of Two Strings
+/// Analyze two input text strings, typically sentences, and determine the semantic similarity of each.  Semantic similarity refers to the degree to which two sentences mean the same thing semantically.  Uses advanced Deep Learning to perform the semantic similarity comparison.  Consumes 1-2 API calls per sentence.
+///  @param input Input similarity analysis request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMSimilarityAnalysisResponse*
 ///
--(NSURLSessionTask*) posTaggerTagPronounsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) analyticsSimilarityWithInput: (CMSimilarityAnalysisRequest*) input
+    completionHandler: (void (^)(CMSimilarityAnalysisResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMAnalyticsApiErrorDomain code:kCMAnalyticsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/pronouns"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/analytics/similarity"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -293,7 +301,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -306,35 +314,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMSimilarityAnalysisResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMSimilarityAnalysisResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string
-/// Part-of-speech (POS) tag a string and return result as JSON
-///  @param request Input string 
+/// Perform Subjectivity and Objectivity Analysis on Text
+/// Analyze input text using advanced Subjectivity and Objectivity Language Analysis to determine if the input text is objective or subjective, and how much.  Supports English language input.  Consumes 1-2 API calls per sentence.
+///  @param input Input subjectivity analysis request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMSubjectivityAnalysisResponse*
 ///
--(NSURLSessionTask*) posTaggerTagSentenceWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) analyticsSubjectivityWithInput: (CMSubjectivityAnalysisRequest*) input
+    completionHandler: (void (^)(CMSubjectivityAnalysisResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMAnalyticsApiErrorDomain code:kCMAnalyticsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/sentence"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/analytics/subjectivity"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -359,7 +367,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -372,76 +380,10 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMSubjectivityAnalysisResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Part-of-speech tag a string, filter to verbs
-/// Part-of-speech (POS) tag a string, find the verbs, and return result as JSON
-///  @param request Input string 
-///
-///  @returns CMPosResponse*
-///
--(NSURLSessionTask*) posTaggerTagVerbsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/verbs"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"Apikey"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMSubjectivityAnalysisResponse*)data, error);
                                 }
                             }];
 }

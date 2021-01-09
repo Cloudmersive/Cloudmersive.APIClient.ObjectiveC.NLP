@@ -1,20 +1,20 @@
-#import "CMLanguageDetectionApi.h"
+#import "CMRephraseApi.h"
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
-#import "CMLanguageDetectionRequest.h"
-#import "CMLanguageDetectionResponse.h"
+#import "CMRephraseRequest.h"
+#import "CMRephraseResponse.h"
 
 
-@interface CMLanguageDetectionApi ()
+@interface CMRephraseApi ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
-@implementation CMLanguageDetectionApi
+@implementation CMRephraseApi
 
-NSString* kCMLanguageDetectionApiErrorDomain = @"CMLanguageDetectionApiErrorDomain";
-NSInteger kCMLanguageDetectionApiMissingParamErrorCode = 234513;
+NSString* kCMRephraseApiErrorDomain = @"CMRephraseApiErrorDomain";
+NSInteger kCMRephraseApiMissingParamErrorCode = 234513;
 
 @synthesize apiClient = _apiClient;
 
@@ -51,26 +51,26 @@ NSInteger kCMLanguageDetectionApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Detect language of text
-/// Automatically determine which language a text string is written in.  Supports Danish (DAN), German (DEU), English (ENG), French (FRA), Italian (ITA), Japanese (JPN), Korean (KOR), Dutch (NLD), Norwegian (NOR), Portuguese (POR), Russian (RUS), Spanish (SPA), Swedish (SWE), Chinese (ZHO).
-///  @param input  
+/// Rephrase, paraphrase English text sentence-by-sentence using Deep Learning AI
+/// Automatically rephrases or paraphrases input text in English sentence by sentence using advanced Deep Learning and Neural NLP.  Creates multiple reprhasing candidates per input sentence, from 1 to 10 possible rephrasings of the original sentence.  Seeks to preserve original semantic meaning in rephrased output candidates.  Consumes 1-2 API calls per output rephrasing option generated, per sentence.
+///  @param input Input rephrase request 
 ///
-///  @returns CMLanguageDetectionResponse*
+///  @returns CMRephraseResponse*
 ///
--(NSURLSessionTask*) languageDetectionGetLanguageWithInput: (CMLanguageDetectionRequest*) input
-    completionHandler: (void (^)(CMLanguageDetectionResponse* output, NSError* error)) handler {
+-(NSURLSessionTask*) rephraseEnglishRephraseSentenceBySentenceWithInput: (CMRephraseRequest*) input
+    completionHandler: (void (^)(CMRephraseResponse* output, NSError* error)) handler {
     // verify the required parameter 'input' is set
     if (input == nil) {
         NSParameterAssert(input);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
-            NSError* error = [NSError errorWithDomain:kCMLanguageDetectionApiErrorDomain code:kCMLanguageDetectionApiMissingParamErrorCode userInfo:userInfo];
+            NSError* error = [NSError errorWithDomain:kCMRephraseApiErrorDomain code:kCMRephraseApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/language/detect"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/rephrase/rephrase/eng/by-sentence"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -108,10 +108,10 @@ NSInteger kCMLanguageDetectionApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMLanguageDetectionResponse*"
+                              responseType: @"CMRephraseResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMLanguageDetectionResponse*)data, error);
+                                    handler((CMRephraseResponse*)data, error);
                                 }
                             }];
 }

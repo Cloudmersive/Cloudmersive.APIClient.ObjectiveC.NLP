@@ -51,22 +51,41 @@ Import the following:
 #import <CloudmersiveNLPApiClient/CMExtractEntitiesResponse.h>
 #import <CloudmersiveNLPApiClient/CMGetWordsRequest.h>
 #import <CloudmersiveNLPApiClient/CMGetWordsResponse.h>
+#import <CloudmersiveNLPApiClient/CMHateSpeechAnalysisRequest.h>
+#import <CloudmersiveNLPApiClient/CMHateSpeechAnalysisResponse.h>
 #import <CloudmersiveNLPApiClient/CMLanguageDetectionRequest.h>
 #import <CloudmersiveNLPApiClient/CMLanguageDetectionResponse.h>
+#import <CloudmersiveNLPApiClient/CMLanguageTranslationRequest.h>
+#import <CloudmersiveNLPApiClient/CMLanguageTranslationResponse.h>
 #import <CloudmersiveNLPApiClient/CMParseRequest.h>
 #import <CloudmersiveNLPApiClient/CMParseResponse.h>
 #import <CloudmersiveNLPApiClient/CMPosRequest.h>
 #import <CloudmersiveNLPApiClient/CMPosResponse.h>
 #import <CloudmersiveNLPApiClient/CMPosSentence.h>
 #import <CloudmersiveNLPApiClient/CMPosTaggedWord.h>
+#import <CloudmersiveNLPApiClient/CMProfanityAnalysisRequest.h>
+#import <CloudmersiveNLPApiClient/CMProfanityAnalysisResponse.h>
+#import <CloudmersiveNLPApiClient/CMRephraseRequest.h>
+#import <CloudmersiveNLPApiClient/CMRephraseResponse.h>
+#import <CloudmersiveNLPApiClient/CMRephrasedSentence.h>
+#import <CloudmersiveNLPApiClient/CMRephrasedSentenceOption.h>
 #import <CloudmersiveNLPApiClient/CMSentenceSegmentationRequest.h>
 #import <CloudmersiveNLPApiClient/CMSentenceSegmentationResponse.h>
+#import <CloudmersiveNLPApiClient/CMSentimentAnalysisRequest.h>
+#import <CloudmersiveNLPApiClient/CMSentimentAnalysisResponse.h>
+#import <CloudmersiveNLPApiClient/CMSimilarityAnalysisRequest.h>
+#import <CloudmersiveNLPApiClient/CMSimilarityAnalysisResponse.h>
+#import <CloudmersiveNLPApiClient/CMSubjectivityAnalysisRequest.h>
+#import <CloudmersiveNLPApiClient/CMSubjectivityAnalysisResponse.h>
 #import <CloudmersiveNLPApiClient/CMWordPosition.h>
 // load API classes for accessing endpoints
+#import <CloudmersiveNLPApiClient/CMAnalyticsApi.h>
 #import <CloudmersiveNLPApiClient/CMExtractEntitiesApi.h>
 #import <CloudmersiveNLPApiClient/CMLanguageDetectionApi.h>
+#import <CloudmersiveNLPApiClient/CMLanguageTranslationApi.h>
 #import <CloudmersiveNLPApiClient/CMParseApi.h>
 #import <CloudmersiveNLPApiClient/CMPosTaggerApi.h>
+#import <CloudmersiveNLPApiClient/CMRephraseApi.h>
 #import <CloudmersiveNLPApiClient/CMSegmentationApi.h>
 #import <CloudmersiveNLPApiClient/CMSpellcheckApi.h>
 
@@ -90,13 +109,13 @@ CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
 
 
-CMExtractEntitiesRequest* *value = [[CMExtractEntitiesRequest alloc] init]; // Input string
+CMHateSpeechAnalysisRequest* *input = [[CMHateSpeechAnalysisRequest alloc] init]; // Input hate speech analysis request
 
-CMExtractEntitiesApi *apiInstance = [[CMExtractEntitiesApi alloc] init];
+CMAnalyticsApi *apiInstance = [[CMAnalyticsApi alloc] init];
 
-// Extract entities from string
-[apiInstance extractEntitiesPostWithValue:value
-              completionHandler: ^(CMExtractEntitiesResponse* output, NSError* error) {
+// Perform Hate Speech Analysis and Detection on Text
+[apiInstance analyticsHateSpeechWithInput:input
+              completionHandler: ^(CMHateSpeechAnalysisResponse* output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -113,15 +132,27 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CMAnalyticsApi* | [**analyticsHateSpeech**](docs/CMAnalyticsApi.md#analyticshatespeech) | **POST** /nlp-v2/analytics/hate-speech | Perform Hate Speech Analysis and Detection on Text
+*CMAnalyticsApi* | [**analyticsProfanity**](docs/CMAnalyticsApi.md#analyticsprofanity) | **POST** /nlp-v2/analytics/profanity | Perform Profanity and Obscene Language Analysis and Detection on Text
+*CMAnalyticsApi* | [**analyticsSentiment**](docs/CMAnalyticsApi.md#analyticssentiment) | **POST** /nlp-v2/analytics/sentiment | Perform Sentiment Analysis and Classification on Text
+*CMAnalyticsApi* | [**analyticsSimilarity**](docs/CMAnalyticsApi.md#analyticssimilarity) | **POST** /nlp-v2/analytics/similarity | Perform Semantic Similarity Comparison of Two Strings
+*CMAnalyticsApi* | [**analyticsSubjectivity**](docs/CMAnalyticsApi.md#analyticssubjectivity) | **POST** /nlp-v2/analytics/subjectivity | Perform Subjectivity and Objectivity Analysis on Text
 *CMExtractEntitiesApi* | [**extractEntitiesPost**](docs/CMExtractEntitiesApi.md#extractentitiespost) | **POST** /nlp-v2/extract-entities | Extract entities from string
 *CMLanguageDetectionApi* | [**languageDetectionGetLanguage**](docs/CMLanguageDetectionApi.md#languagedetectiongetlanguage) | **POST** /nlp-v2/language/detect | Detect language of text
-*CMParseApi* | [**parseParseString**](docs/CMParseApi.md#parseparsestring) | **POST** /nlp/parse/tree | Parse string to syntax tree
+*CMLanguageTranslationApi* | [**languageTranslationTranslateDeuToEng**](docs/CMLanguageTranslationApi.md#languagetranslationtranslatedeutoeng) | **POST** /nlp-v2/translate/language/deu/to/eng | Translate German to English text with Deep Learning AI
+*CMLanguageTranslationApi* | [**languageTranslationTranslateEngToDeu**](docs/CMLanguageTranslationApi.md#languagetranslationtranslateengtodeu) | **POST** /nlp-v2/translate/language/eng/to/deu | Translate English to German text with Deep Learning AI
+*CMLanguageTranslationApi* | [**languageTranslationTranslateEngToFra**](docs/CMLanguageTranslationApi.md#languagetranslationtranslateengtofra) | **POST** /nlp-v2/translate/language/eng/to/fra | Translate English to French text with Deep Learning AI
+*CMLanguageTranslationApi* | [**languageTranslationTranslateEngToRus**](docs/CMLanguageTranslationApi.md#languagetranslationtranslateengtorus) | **POST** /nlp-v2/translate/language/eng/to/rus | Translate English to Russian text with Deep Learning AI
+*CMLanguageTranslationApi* | [**languageTranslationTranslateFraToEng**](docs/CMLanguageTranslationApi.md#languagetranslationtranslatefratoeng) | **POST** /nlp-v2/translate/language/fra/to/eng | Translate French to English text with Deep Learning AI
+*CMLanguageTranslationApi* | [**languageTranslationTranslateRusToEng**](docs/CMLanguageTranslationApi.md#languagetranslationtranslaterustoeng) | **POST** /nlp-v2/translate/language/rus/to/eng | Translate Russian to English text with Deep Learning AI
+*CMParseApi* | [**parseParseString**](docs/CMParseApi.md#parseparsestring) | **POST** /nlp-v2/parse/tree | Parse string to syntax tree
 *CMPosTaggerApi* | [**posTaggerTagAdjectives**](docs/CMPosTaggerApi.md#postaggertagadjectives) | **POST** /nlp-v2/pos/tag/adjectives | Part-of-speech tag a string, filter to adjectives
 *CMPosTaggerApi* | [**posTaggerTagAdverbs**](docs/CMPosTaggerApi.md#postaggertagadverbs) | **POST** /nlp-v2/pos/tag/adverbs | Part-of-speech tag a string, filter to adverbs
 *CMPosTaggerApi* | [**posTaggerTagNouns**](docs/CMPosTaggerApi.md#postaggertagnouns) | **POST** /nlp-v2/pos/tag/nouns | Part-of-speech tag a string, filter to nouns
 *CMPosTaggerApi* | [**posTaggerTagPronouns**](docs/CMPosTaggerApi.md#postaggertagpronouns) | **POST** /nlp-v2/pos/tag/pronouns | Part-of-speech tag a string, filter to pronouns
 *CMPosTaggerApi* | [**posTaggerTagSentence**](docs/CMPosTaggerApi.md#postaggertagsentence) | **POST** /nlp-v2/pos/tag/sentence | Part-of-speech tag a string
 *CMPosTaggerApi* | [**posTaggerTagVerbs**](docs/CMPosTaggerApi.md#postaggertagverbs) | **POST** /nlp-v2/pos/tag/verbs | Part-of-speech tag a string, filter to verbs
+*CMRephraseApi* | [**rephraseEnglishRephraseSentenceBySentence**](docs/CMRephraseApi.md#rephraseenglishrephrasesentencebysentence) | **POST** /nlp-v2/rephrase/rephrase/eng/by-sentence | Rephrase, paraphrase English text sentence-by-sentence using Deep Learning AI
 *CMSegmentationApi* | [**segmentationGetSentences**](docs/CMSegmentationApi.md#segmentationgetsentences) | **POST** /nlp-v2/segmentation/sentences | Extract sentences from string
 *CMSegmentationApi* | [**segmentationGetWords**](docs/CMSegmentationApi.md#segmentationgetwords) | **POST** /nlp-v2/segmentation/words | Get words in input string
 *CMSpellcheckApi* | [**spellcheckCheckSentence**](docs/CMSpellcheckApi.md#spellcheckchecksentence) | **POST** /nlp-v2/spellcheck/check/sentence | Check if sentence is spelled correctly
@@ -140,16 +171,32 @@ Class | Method | HTTP request | Description
  - [CMExtractEntitiesResponse](docs/CMExtractEntitiesResponse.md)
  - [CMGetWordsRequest](docs/CMGetWordsRequest.md)
  - [CMGetWordsResponse](docs/CMGetWordsResponse.md)
+ - [CMHateSpeechAnalysisRequest](docs/CMHateSpeechAnalysisRequest.md)
+ - [CMHateSpeechAnalysisResponse](docs/CMHateSpeechAnalysisResponse.md)
  - [CMLanguageDetectionRequest](docs/CMLanguageDetectionRequest.md)
  - [CMLanguageDetectionResponse](docs/CMLanguageDetectionResponse.md)
+ - [CMLanguageTranslationRequest](docs/CMLanguageTranslationRequest.md)
+ - [CMLanguageTranslationResponse](docs/CMLanguageTranslationResponse.md)
  - [CMParseRequest](docs/CMParseRequest.md)
  - [CMParseResponse](docs/CMParseResponse.md)
  - [CMPosRequest](docs/CMPosRequest.md)
  - [CMPosResponse](docs/CMPosResponse.md)
  - [CMPosSentence](docs/CMPosSentence.md)
  - [CMPosTaggedWord](docs/CMPosTaggedWord.md)
+ - [CMProfanityAnalysisRequest](docs/CMProfanityAnalysisRequest.md)
+ - [CMProfanityAnalysisResponse](docs/CMProfanityAnalysisResponse.md)
+ - [CMRephraseRequest](docs/CMRephraseRequest.md)
+ - [CMRephraseResponse](docs/CMRephraseResponse.md)
+ - [CMRephrasedSentence](docs/CMRephrasedSentence.md)
+ - [CMRephrasedSentenceOption](docs/CMRephrasedSentenceOption.md)
  - [CMSentenceSegmentationRequest](docs/CMSentenceSegmentationRequest.md)
  - [CMSentenceSegmentationResponse](docs/CMSentenceSegmentationResponse.md)
+ - [CMSentimentAnalysisRequest](docs/CMSentimentAnalysisRequest.md)
+ - [CMSentimentAnalysisResponse](docs/CMSentimentAnalysisResponse.md)
+ - [CMSimilarityAnalysisRequest](docs/CMSimilarityAnalysisRequest.md)
+ - [CMSimilarityAnalysisResponse](docs/CMSimilarityAnalysisResponse.md)
+ - [CMSubjectivityAnalysisRequest](docs/CMSubjectivityAnalysisRequest.md)
+ - [CMSubjectivityAnalysisResponse](docs/CMSubjectivityAnalysisResponse.md)
  - [CMWordPosition](docs/CMWordPosition.md)
 
 

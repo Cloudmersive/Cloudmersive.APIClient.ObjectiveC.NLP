@@ -1,20 +1,20 @@
-#import "CMPosTaggerApi.h"
+#import "CMLanguageTranslationApi.h"
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
-#import "CMPosRequest.h"
-#import "CMPosResponse.h"
+#import "CMLanguageTranslationRequest.h"
+#import "CMLanguageTranslationResponse.h"
 
 
-@interface CMPosTaggerApi ()
+@interface CMLanguageTranslationApi ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
-@implementation CMPosTaggerApi
+@implementation CMLanguageTranslationApi
 
-NSString* kCMPosTaggerApiErrorDomain = @"CMPosTaggerApiErrorDomain";
-NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
+NSString* kCMLanguageTranslationApiErrorDomain = @"CMLanguageTranslationApiErrorDomain";
+NSInteger kCMLanguageTranslationApiMissingParamErrorCode = 234513;
 
 @synthesize apiClient = _apiClient;
 
@@ -51,26 +51,26 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Part-of-speech tag a string, filter to adjectives
-/// Part-of-speech (POS) tag a string, find the adjectives, and return result as JSON
-///  @param request Input string 
+/// Translate German to English text with Deep Learning AI
+/// Automatically translates input text in German to output text in English using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagAdjectivesWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateDeuToEngWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/adjectives"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/deu/to/eng"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -95,7 +95,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -108,35 +108,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to adverbs
-/// Part-of-speech (POS) tag a string, find the adverbs, and return result as JSON
-///  @param request Input string 
+/// Translate English to German text with Deep Learning AI
+/// Automatically translates input text in English to output text in German using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagAdverbsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateEngToDeuWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/adverbs"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/eng/to/deu"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -161,7 +161,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -174,35 +174,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to nouns
-/// Part-of-speech (POS) tag a string, find the nouns, and return result as JSON
-///  @param request Input string 
+/// Translate English to French text with Deep Learning AI
+/// Automatically translates input text in English to output text in French using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagNounsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateEngToFraWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/nouns"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/eng/to/fra"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -227,7 +227,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -240,35 +240,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to pronouns
-/// Part-of-speech (POS) tag a string, find the pronouns, and return result as JSON
-///  @param request Input string 
+/// Translate English to Russian text with Deep Learning AI
+/// Automatically translates input text in English to output text in Russian using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagPronounsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateEngToRusWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/pronouns"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/eng/to/rus"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -293,7 +293,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -306,35 +306,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string
-/// Part-of-speech (POS) tag a string and return result as JSON
-///  @param request Input string 
+/// Translate French to English text with Deep Learning AI
+/// Automatically translates input text in French to output text in English using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagSentenceWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateFraToEngWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/sentence"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/fra/to/eng"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -359,7 +359,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -372,35 +372,35 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Part-of-speech tag a string, filter to verbs
-/// Part-of-speech (POS) tag a string, find the verbs, and return result as JSON
-///  @param request Input string 
+/// Translate Russian to English text with Deep Learning AI
+/// Automatically translates input text in Russian to output text in English using advanced Deep Learning and Neural NLP.  Consumes 1-2 API calls per input sentence.
+///  @param input Input translation request 
 ///
-///  @returns CMPosResponse*
+///  @returns CMLanguageTranslationResponse*
 ///
--(NSURLSessionTask*) posTaggerTagVerbsWithRequest: (CMPosRequest*) request
-    completionHandler: (void (^)(CMPosResponse* output, NSError* error)) handler {
-    // verify the required parameter 'request' is set
-    if (request == nil) {
-        NSParameterAssert(request);
+-(NSURLSessionTask*) languageTranslationTranslateRusToEngWithInput: (CMLanguageTranslationRequest*) input
+    completionHandler: (void (^)(CMLanguageTranslationResponse* output, NSError* error)) handler {
+    // verify the required parameter 'input' is set
+    if (input == nil) {
+        NSParameterAssert(input);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
-            NSError* error = [NSError errorWithDomain:kCMPosTaggerApiErrorDomain code:kCMPosTaggerApiMissingParamErrorCode userInfo:userInfo];
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"input"] };
+            NSError* error = [NSError errorWithDomain:kCMLanguageTranslationApiErrorDomain code:kCMLanguageTranslationApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/pos/tag/verbs"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/nlp-v2/translate/language/rus/to/eng"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
@@ -425,7 +425,7 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = request;
+    bodyParam = input;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -438,10 +438,10 @@ NSInteger kCMPosTaggerApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"CMPosResponse*"
+                              responseType: @"CMLanguageTranslationResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((CMPosResponse*)data, error);
+                                    handler((CMLanguageTranslationResponse*)data, error);
                                 }
                             }];
 }
